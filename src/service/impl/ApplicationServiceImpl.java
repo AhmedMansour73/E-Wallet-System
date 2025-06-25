@@ -75,7 +75,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     private void loginFeatures(Account account) {
         int choose;
         int counter = 4;
-        boolean isUserLogout = false;
+        // boolean isUserLogout = false;
         while (counter != 0) {
             try
             {

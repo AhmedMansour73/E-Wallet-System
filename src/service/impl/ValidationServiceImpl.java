@@ -71,7 +71,6 @@ public class ValidationServiceImpl implements ValidationService {
             }while (!isValidPassword(password));
 
         int age=0;
-        boolean ageIsValid =false;
         do {
                 try {
                 

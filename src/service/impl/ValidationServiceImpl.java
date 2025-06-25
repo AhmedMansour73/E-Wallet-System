@@ -1,5 +1,6 @@
 package service.impl;
 
+import java.util.InputMismatchException;
 import model.Account;
 import service.ValidationService;
 
@@ -69,14 +70,25 @@ public class ValidationServiceImpl implements ValidationService {
                 
             }while (!isValidPassword(password));
 
-        int age;
+        int age=0;
+        boolean ageIsValid =false;
         do {
-                System.out.println("Please enter age");
-                age = scanner.nextInt();
-                if (!isValidAge(age)) {
+                try {
+                
+                    System.out.println("Please enter age");
+                    age = scanner.nextInt();
+                    if (!isValidAge(age)) {
                         System.out.println("invalid age.");
-                         System.out.println("age must be between [18, 80].");
+                        System.out.println("age must be between [18, 80].");
+                    }
+                } 
+                catch (InputMismatchException e) {
+                    System.out.println("Invalid input: Please enter a valid number.");
+                    scanner.next();
+                }catch (Exception e) {
+                    System.out.println("Errpr : "+ e.getMessage());
                 }
+                
                 
             }while (!isValidAge(age));
        
@@ -86,7 +98,7 @@ public class ValidationServiceImpl implements ValidationService {
                 System.out.println("Please enter phone number");
                 phoneNumber = scanner.next();
                 if (!isValidPhoneNumber(phoneNumber)) {
-                        System.out.println("phone number.");
+                        System.out.println("invalid phone number.");
                         System.out.println("phone number must start with 2 and length must be 12.");
                 }
                 

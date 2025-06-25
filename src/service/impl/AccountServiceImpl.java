@@ -65,21 +65,21 @@ public class AccountServiceImpl implements AccountService {
     
     @Override
     public int transfer(Account account, String userNameAccountTransfer, double money) {
-        // TODO if account not exist return 1
+        //  if account not exist return 1
         int accountIndex = checkIfAccountExist(account);
         if (accountIndex == -1) {
             return 1;
         }
-        // TODO if userNameAccountTransfer not exist return 2
+        //  if userNameAccountTransfer not exist return 2
         int usernameIndex = checkIfUsernameIsExit(userNameAccountTransfer);
         if( usernameIndex == -1)
             return 2;
-        // TODO if money that will transfer is greater than account balance return 3
+        //  if money that will transfer is greater than account balance return 3
         if(money > eWallet.getAccounts().get(accountIndex).getBalance())
             return 3;
         
-        // TODO If all above is true now ready to transfer
-        // TODO transfer process cut money from account and add to userNameAccountTransfer then return 4
+        //  If all above is true now ready to transfer
+        //  transfer process cut money from account and add to userNameAccountTransfer then return 4
         try
         {
             eWallet.getAccounts().get(accountIndex).setBalance(

@@ -58,7 +58,7 @@ public class ApplicationServiceImpl implements ApplicationService {
      * this function for login
      */
     private void login() {
-        // TODO APPlY Validation for only username and password 
+        //  APPlY Validation for only username and password 
         Account account = validationService.validateLoginAccount();
         
         boolean isLogin = accountService.login(account);
@@ -100,8 +100,10 @@ public class ApplicationServiceImpl implements ApplicationService {
                         break;
                     case 6:
                         System.out.println("Have a nice Day :)");
-                        isUserLogout = true;
-                        break;
+//                        isUserLogout = true;
+                        return ;
+//                        break;
+                        
                     default:
                         counter--;
                         System.out.println("Invalid choose");
@@ -110,9 +112,9 @@ public class ApplicationServiceImpl implements ApplicationService {
                         System.out.println("multi invalid choose please try later.");
                     }
 
-                    if (isUserLogout) {
-                        break;
-                    }
+//                    if (isUserLogout) {
+//                        break;
+//                    }
                 
             }catch(Exception e)
             {
@@ -140,14 +142,14 @@ public class ApplicationServiceImpl implements ApplicationService {
             int withdrawStatus = accountService.withDraw(account, money);
 
             switch (withdrawStatus) {
-                case 3:
-                    System.out.println("Withdrawal successful :)");
-                    break;
                 case 1:
                     System.out.println("Account does not exist for withdrawal :(");
                     break;
                 case 2:
                     System.out.println("Insufficient funds: The amount exceeds your account balance :(");
+                    break;
+                case 3:
+                    System.out.println("Withdrawal successful :)");
                     break;
                 default:
                     System.out.println("Unexpected error during withdrawal :(");
@@ -195,7 +197,7 @@ public class ApplicationServiceImpl implements ApplicationService {
             }
         } catch (InputMismatchException e) {
             System.out.println("Invalid input: Please enter a valid number.");
-//            scanner.next(); // Clear the invalid input
+            scanner.next(); // Clear the invalid input
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         } catch (Exception e) {
@@ -216,7 +218,7 @@ public class ApplicationServiceImpl implements ApplicationService {
             }
 
             // Prevent self-transfer
-            if (username.equalsIgnoreCase(sourceAccount.getUserName())) {
+            if (username.equals(sourceAccount.getUserName())) {
                 System.out.println("Error: Cannot transfer to yourself");
                 return;
             }
@@ -237,8 +239,7 @@ public class ApplicationServiceImpl implements ApplicationService {
             // Handle transfer result
             switch (transferStatus) {
                 case 4:
-                    System.out.printf("Transfer of $%.2f to %s successful%n", amount, username);
-                    
+                    System.out.printf("Transfer of %.2f to %s successful%n", amount, username); 
                     break;
                 case 3:
                     System.out.println("Error: Insufficient funds for transfer");
@@ -254,7 +255,7 @@ public class ApplicationServiceImpl implements ApplicationService {
             }
         } catch (InputMismatchException e) {
             System.out.println("Error: Invalid amount entered");
-           
+            scanner.next();
         } catch (Exception e) {
             System.out.println("Error during transfer: " + e.getMessage());
             
@@ -271,18 +272,18 @@ public class ApplicationServiceImpl implements ApplicationService {
         {
             int changepassordSuccess = accountService.changePassword(account,oldPasswrd,newPasswrd);
             switch (changepassordSuccess) {
-                case 1:
-                    System.out.println("change password success");
-                    break;
                 case -1:
                     System.out.println("account not exist");
                     break;
+                case 1:
+                    System.out.println("change password success");
+                    break;
                 default:
-                    System.out.println("your old password not corect");
+                    System.out.println("your old password not coreect");
                     break;
             }
         }else
-            System.out.println("Invalid new password");
+            System.out.println("Invalid new password\n password must have A or B ... and a or b ... and 1 or 2 ... and # or $ or @ or & n");
         
         
     }
